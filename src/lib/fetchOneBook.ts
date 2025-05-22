@@ -1,11 +1,7 @@
 import { BookType } from "@/types";
 
-export default async function fetchBooks(q?: string): Promise<BookType[]> {
-  let url = 'http://localhost:12345/book';
-
-  if (q) {
-    url += `/search?q=${q}`;
-  }
+export default async function fetchOneBooks(id: number): Promise<BookType | null> {
+  let url = `http://localhost:12345/book/${id}`;
 
   try {
     const response = await fetch(url);
@@ -16,7 +12,6 @@ export default async function fetchBooks(q?: string): Promise<BookType[]> {
     return data;
   } catch (err) {
     console.error(err);
-    return [];
+    return null;
   }
 }
-

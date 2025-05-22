@@ -1,9 +1,22 @@
-import { useRouter } from 'next/router';
-import books from '@/mock/books.json';
 import bookStyles from '@/pages/book/[id].module.css';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import fetchOneBooks from '@/lib/fetchOneBook';
 
-export default function Book() {
-  const { id, title, subTitle, description, author, publisher, coverImgUrl } = books[0];
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const id = context.params!.id;
+  const book = await fetchOneBooks(Number(id));
+
+  return {
+    props: { book },
+  };
+};
+
+export default function Book({ book }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  if (!book) {
+    return <div>책을 찾을 수 없습니다.</div>;
+  }
+
+  const { title, subTitle, description, author, publisher, coverImgUrl } = book;
   return (
     <div className={bookStyles.container}>
       <div className={bookStyles.coverImgContainer} style={{ backgroundImage: `url('${coverImgUrl}')` }}>
