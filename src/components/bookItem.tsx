@@ -2,7 +2,7 @@ import { BookType } from '@/types';
 import Link from 'next/link';
 import bookItemStyles from './bookItem.module.css';
 
-export default function BookItem({ id, title, subTitle, description, author, publisher, coverImgUrl }: BookType) {
+export default function BookItem({ id, title, subTitle, author, publisher, coverImgUrl }: BookType) {
   return (
     <Link href={`/book/${id}`} className={bookItemStyles.container}>
       <img src={coverImgUrl} />

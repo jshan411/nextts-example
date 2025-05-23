@@ -1,4 +1,4 @@
-import { BookType } from "@/types";
+import { BookType } from '@/types';
 
 export default async function fetchOneBooks(id: number): Promise<BookType | null> {
   let url = `http://localhost:12345/book/${id}`;

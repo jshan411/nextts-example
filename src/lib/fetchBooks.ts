@@ -1,4 +1,4 @@
-import { BookType } from "@/types";
+import { BookType } from '@/types';
 
 export default async function fetchBooks(q?: string): Promise<BookType[]> {
   let url = 'http://localhost:12345/book';
@@ -19,4 +19,3 @@ export default async function fetchBooks(q?: string): Promise<BookType[]> {
     return [];
   }
 }
-

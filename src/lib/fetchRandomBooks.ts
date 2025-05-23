@@ -1,4 +1,4 @@
-import { BookType } from "@/types";
+import { BookType } from '@/types';
 
 export default async function fetchRandomBooks(): Promise<BookType[]> {
   const url = 'http://localhost:12345/book/random';
