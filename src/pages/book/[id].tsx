@@ -20,7 +20,7 @@ export default function Book({ book }: InferGetServerSidePropsType<typeof getSer
   return (
     <div className={bookStyles.container}>
       <div className={bookStyles.coverImgContainer} style={{ backgroundImage: `url('${coverImgUrl}')` }}>
-        <img src={coverImgUrl} />
+        <img src={coverImgUrl} alt={`${title} 표지`} />
       </div>
       <div>
         <div className={bookStyles.title}>{title}</div>

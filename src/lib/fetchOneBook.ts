@@ -11,7 +11,6 @@ export default async function fetchOneBooks(id: number): Promise<BookType | null
     const data = await response.json();
     return data;
   } catch (err) {
-    console.error(err);
     return null;
   }
 }

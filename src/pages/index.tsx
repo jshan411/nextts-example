@@ -3,11 +3,13 @@ import SearchableLayout from '@/components/searchableLayout';
 import { ReactNode, useEffect } from 'react';
 import books from '@/mock/books.json';
 import BookItem from '@/components/bookItem';
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import fetchBooks from '@/lib/fetchBooks';
 import fetchRandomBooks from '@/lib/fetchRandomBooks';
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
+  console.log('getStaticProps');
+
   const [allBooks, recommendedBooks] = await Promise.all([fetchBooks(), fetchRandomBooks()]);
 
   return {
@@ -18,7 +20,7 @@ export const getServerSideProps = async () => {
   };
 };
 
-export default function Home({ allBooks, recommendedBooks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ allBooks, recommendedBooks }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className={indexStyles.container}>
       <section>

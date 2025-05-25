@@ -15,7 +15,6 @@ export default async function fetchBooks(q?: string): Promise<BookType[]> {
     const data = await response.json();
     return data;
   } catch (err) {
-    console.error(err);
     return [];
   }
 }
