@@ -13,17 +13,17 @@ export const getServerSideProps = async () => {
   return {
     props: {
       allBooks,
-      randomBooks: recommendedBooks,
+      recommendedBooks,
     },
   };
 };
 
-export default function Home({ allBooks, randomBooks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ allBooks, recommendedBooks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div className={indexStyles.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        {randomBooks.map(book => (
+        {recommendedBooks.map(book => (
           <BookItem key={book.id} {...book} />
         ))}
       </section>
