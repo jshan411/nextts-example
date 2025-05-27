@@ -1,7 +1,6 @@
 import indexStyles from '@/pages/index.module.css';
 import SearchableLayout from '@/components/searchableLayout';
-import { ReactNode, useEffect } from 'react';
-import books from '@/mock/books.json';
+import { ReactNode } from 'react';
 import BookItem from '@/components/bookItem';
 import { InferGetStaticPropsType } from 'next';
 import fetchBooks from '@/lib/fetchBooks';
@@ -17,6 +16,8 @@ export const getStaticProps = async () => {
       allBooks,
       recommendedBooks,
     },
+    revalidate: 10, // ISR 방식으로 10초마다 데이터 갱신
+    // 스케줄러 타입의 화면에 적용하기 좋은 렌더링 방식
   };
 };
 
