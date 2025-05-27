@@ -25,7 +25,7 @@ export default function Home({ allBooks, recommendedBooks }: InferGetStaticProps
         <title>테스트 도서 목록</title>
         <meta property="og:title" content="테스트 도서 목록" />
         <meta property="og:description" content="테스트 도서 목록입니다." />
-        <meta property="og:image" content="/thumnail.png" />
+        <meta property="og:image" content="https://aoroawebstorage.blob.core.windows.net/images/alind.png" />
       </Head>
       <div className={indexStyles.container}>
         <section>

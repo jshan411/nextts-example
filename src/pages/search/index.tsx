@@ -42,7 +42,7 @@ export default function Search() {
         <title>검색 결과</title>
         <meta property="og:title" content="검색 결과" />
         <meta property="og:description" content="검색 결과입니다." />
-        <meta property="og:image" content="/thumnail.png" />
+        <meta property="og:image" content="https://aoroawebstorage.blob.core.windows.net/images/alind.png" />
       </Head>
       {books.map(book => (
         <BookItem key={book.id} {...book} />
