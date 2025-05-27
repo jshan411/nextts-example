@@ -5,6 +5,7 @@ import BookItem from '@/components/bookItem';
 import fetchBooks from '@/lib/fetchBooks';
 import { useRouter } from 'next/router';
 import { BookType } from '@/types';
+import Head from 'next/head';
 
 // // getStaticProps 함수는 빌드 시 실행된다 -> 빌드 시점에 쿼리 파라메터를 알 수 없음.
 // export const getStaticProps = async (context: GetStaticPropsContext) => {
@@ -37,6 +38,12 @@ export default function Search() {
 
   return (
     <div>
+      <Head>
+        <title>검색 결과</title>
+        <meta property="og:title" content="검색 결과" />
+        <meta property="og:description" content="검색 결과입니다." />
+        <meta property="og:image" content="/thumnail.png" />
+      </Head>
       {books.map(book => (
         <BookItem key={book.id} {...book} />
       ))}
