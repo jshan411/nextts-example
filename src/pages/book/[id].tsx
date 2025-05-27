@@ -1,17 +1,41 @@
 import bookStyles from '@/pages/book/[id].module.css';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import fetchOneBooks from '@/lib/fetchOneBook';
+import { useRouter } from 'next/router';
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getStaticPaths = async () => {
+  // 화면 접속 비율을 계산해서, paths에 지정할지 blocking 할지 결정
+  return {
+    paths: [{ params: { id: '1' } }, { params: { id: '2' } }, { params: { id: '3' } }],
+    fallback: true, // 빌드 시점에 존재하지 않는 경로에 접속했을 때의 대비책;
+    // false: 404 Not Found
+    // blocking: SSR 방식
+    // true: SSR 방식 + 데이터가 없는 fallback 페이지 제공
+  };
+};
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = context.params!.id;
   const book = await fetchOneBooks(Number(id));
+
+  if (!book) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: { book },
   };
 };
 
-export default function Book({ book }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Book({ book }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   if (!book) {
     return <div>책을 찾을 수 없습니다.</div>;
   }
