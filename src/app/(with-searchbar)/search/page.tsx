@@ -8,5 +8,5 @@ export default async function Search({
 }) {
   const { q } = await searchParams;
   // 필요하다면, 구조분해 할당 후에 (아직 string인 상태) 타입 변환 및 정합성 검증을 진행하자.
-  return <div>Search {q}</div>;
+  return <div>Search 페이지 {q}</div>;
 }
