@@ -1,10 +1,12 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import Searchbar from "@/components/searchbar";
 
 export default function SearchLayout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <Searchbar />
+      <Suspense fallback={<div>검색창 로딩 중...</div>}>
+        <Searchbar />
+      </Suspense>
       {children}
     </div>
   );
