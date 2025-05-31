@@ -17,8 +17,8 @@ export default function BookItem({
       <Image
         src={coverImgUrl}
         alt={`${title} 표지`}
-        width={100}
-        height={150}
+        width={80}
+        height={120}
         className={bookItemStyles.coverImage}
       />
       <div>

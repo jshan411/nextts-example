@@ -1,5 +1,5 @@
 import BookItem from "@/components/bookItem";
-import { BookType } from "@/types";
+import { fetchSearchBooks } from "@/lib/api";
 
 export default async function Page({
   searchParams,
@@ -7,19 +7,19 @@ export default async function Page({
   searchParams: Promise<{ q?: string }>;
 }) {
   const { q } = await searchParams;
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`
-  );
-  if (!response.ok) {
-    return <div>Failed to fetch books</div>;
-  }
-  const books: BookType[] = await response.json();
 
-  return (
-    <div>
-      {books.map((book) => (
-        <BookItem key={book.id} {...book} />
-      ))}
-    </div>
-  );
+  try {
+    const books = await fetchSearchBooks(q || "");
+
+    return (
+      <div>
+        {books.map((book) => (
+          <BookItem key={book.id} {...book} />
+        ))}
+      </div>
+    );
+  } catch (error) {
+    console.log(error);
+    return <div>검색 결과를 가져오는데 실패했습니다.</div>;
+  }
 }
