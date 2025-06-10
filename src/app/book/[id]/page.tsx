@@ -41,6 +41,12 @@ export default async function Page({
             width={300}
             height={450}
             priority
+            style={{
+              width: "auto",
+              height: "auto",
+              maxHeight: "350px",
+              objectFit: "contain",
+            }}
           />
         </div>
         <div className={bookStyles.title}>{title}</div>

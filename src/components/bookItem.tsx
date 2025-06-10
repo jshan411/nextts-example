@@ -3,6 +3,10 @@ import Image from "next/image";
 import bookItemStyles from "@/components/bookItem.module.css";
 import { BookType } from "@/types";
 
+interface BookItemProps extends BookType {
+  priority?: boolean; // LCP 최적화를 위한 우선순위 속성 추가
+}
+
 export default function BookItem({
   id,
   title,
@@ -11,7 +15,8 @@ export default function BookItem({
   author,
   publisher,
   coverImgUrl,
-}: BookType) {
+  priority = false, // 기본값은 false
+}: BookItemProps) {
   return (
     <Link href={`/book/${id}`} className={bookItemStyles.container}>
       <Image
@@ -20,6 +25,12 @@ export default function BookItem({
         width={80}
         height={120}
         className={bookItemStyles.coverImage}
+        priority={priority} // 조건부 priority 적용
+        style={{
+          objectFit: "cover",
+          width: "15%",
+          height: "15%",
+        }}
       />
       <div>
         <div className={bookItemStyles.title}>{title}</div>

@@ -1,5 +1,6 @@
 import BookItem from "@/components/bookItem";
 import { fetchSearchBooks } from "@/lib/api";
+import { delay } from "@/utils/delay";
 
 export default async function Page({
   searchParams,
@@ -9,12 +10,13 @@ export default async function Page({
   const { q } = await searchParams;
 
   try {
+    await delay(1500);
     const books = await fetchSearchBooks(q || "");
 
     return (
       <div>
-        {books.map((book) => (
-          <BookItem key={book.id} {...book} />
+        {books.map((book, index) => (
+          <BookItem key={book.id} {...book} priority={index < 2} />
         ))}
       </div>
     );

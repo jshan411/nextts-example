@@ -28,8 +28,7 @@
 
 .cover_img_container > img {
   z-index: 1;
-  max-height: 350px;
-  height: 100%;
+  /* 이미지 크기 관련 스타일은 Next.js Image 컴포넌트의 인라인 스타일에서 처리 */
 }
 
 .title {

@@ -8,8 +8,9 @@
   text-decoration: none;
 }
 
-.container img {
-  width: 80px;
+.coverImage {
+  /* Next.js Image 컴포넌트의 width/height 속성을 사용하므로 CSS에서는 크기 설정 안 함 */
+  object-fit: cover; /* 이미지가 컨테이너에 맞게 조정되도록 */
 }
 
 .title {

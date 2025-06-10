@@ -2,14 +2,17 @@ import BookItem from "@/components/bookItem";
 import indexStyles from "@/app/(with-searchbar)/page.module.css";
 import { fetchAllBooks, fetchRandomBooks } from "@/lib/api";
 
-// 컴포넌트에서는 분리된 함수 사용
-async function AllBooks() {
+async function SelectedBooks() {
   try {
-    const allBooks = await fetchAllBooks();
+    const selectedBooks = await fetchRandomBooks();
     return (
       <div>
-        {allBooks.map((book) => (
-          <BookItem key={book.id} {...book} />
+        {selectedBooks.map((book, index) => (
+          <BookItem
+            key={book.id}
+            {...book}
+            priority={index < 3} // 첫 3개 이미지에만 priority 적용
+          />
         ))}
       </div>
     );
@@ -19,13 +22,18 @@ async function AllBooks() {
   }
 }
 
-async function SelectedBooks() {
+// 컴포넌트에서는 분리된 함수 사용
+async function AllBooks() {
   try {
-    const selectedBooks = await fetchRandomBooks();
+    const allBooks = await fetchAllBooks();
     return (
       <div>
-        {selectedBooks.map((book) => (
-          <BookItem key={book.id} {...book} />
+        {allBooks.map((book, index) => (
+          <BookItem
+            key={book.id}
+            {...book}
+            priority={index < 2} // 첫 2개 이미지에만 priority 적용
+          />
         ))}
       </div>
     );
