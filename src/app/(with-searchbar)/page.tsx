@@ -1,9 +1,12 @@
 import BookItem from "@/components/bookItem";
 import indexStyles from "@/app/(with-searchbar)/page.module.css";
 import { fetchAllBooks, fetchRandomBooks } from "@/lib/api";
+import { delay } from "@/utils/delay";
+import { Suspense } from "react";
 
 async function SelectedBooks() {
   try {
+    await delay(5000);
     const selectedBooks = await fetchRandomBooks();
     return (
       <div>
@@ -11,7 +14,7 @@ async function SelectedBooks() {
           <BookItem
             key={book.id}
             {...book}
-            priority={index < 3} // 첫 3개 이미지에만 priority 적용
+            priority={index === 0} // 첫 번째 이미지에만 priority 적용
           />
         ))}
       </div>
@@ -24,16 +27,16 @@ async function SelectedBooks() {
 
 // 컴포넌트에서는 분리된 함수 사용
 async function AllBooks() {
+  console.log("AllBooks 컴포넌트 렌더링됨");
   try {
+    await delay(1000);
+    console.log("fetchAllBooks 호출 전");
     const allBooks = await fetchAllBooks();
+    console.log("fetchAllBooks 호출 후, 책 개수:", allBooks.length);
     return (
       <div>
         {allBooks.map((book, index) => (
-          <BookItem
-            key={book.id}
-            {...book}
-            priority={index < 2} // 첫 2개 이미지에만 priority 적용
-          />
+          <BookItem key={book.id} {...book} />
         ))}
       </div>
     );
@@ -43,16 +46,22 @@ async function AllBooks() {
   }
 }
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <div className={indexStyles.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        <SelectedBooks />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SelectedBooks />
+        </Suspense>
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
-        <AllBooks />
+        <Suspense fallback={<div>Loading...</div>}>
+          <AllBooks />
+        </Suspense>
       </section>
     </div>
   );
