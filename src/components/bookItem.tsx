@@ -23,14 +23,9 @@ export default function BookItem({
         src={coverImgUrl}
         alt={`${title} 표지`}
         width={80}
-        height={120}
+        height={105}
         className={bookItemStyles.coverImage}
         priority={priority} // 조건부 priority 적용
-        style={{
-          objectFit: "cover",
-          width: "15%",
-          height: "15%",
-        }}
       />
       <div>
         <div className={bookItemStyles.title}>{title}</div>

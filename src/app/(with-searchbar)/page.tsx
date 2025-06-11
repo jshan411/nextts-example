@@ -3,6 +3,7 @@ import indexStyles from "@/app/(with-searchbar)/page.module.css";
 import { fetchAllBooks, fetchRandomBooks } from "@/lib/api";
 import { delay } from "@/utils/delay";
 import { Suspense } from "react";
+import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 
 async function SelectedBooks() {
   try {
@@ -11,11 +12,7 @@ async function SelectedBooks() {
     return (
       <div>
         {selectedBooks.map((book, index) => (
-          <BookItem
-            key={book.id}
-            {...book}
-            priority={index === 0} // 첫 번째 이미지에만 priority 적용
-          />
+          <BookItem key={book.id} {...book} priority={index === 0} />
         ))}
       </div>
     );
@@ -35,7 +32,7 @@ async function AllBooks() {
     console.log("fetchAllBooks 호출 후, 책 개수:", allBooks.length);
     return (
       <div>
-        {allBooks.map((book, index) => (
+        {allBooks.map((book) => (
           <BookItem key={book.id} {...book} />
         ))}
       </div>
@@ -53,13 +50,13 @@ export default function Home() {
     <div className={indexStyles.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<BookListSkeleton count={3} />}>
           <SelectedBooks />
         </Suspense>
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<BookListSkeleton count={5} />}>
           <AllBooks />
         </Suspense>
       </section>
