@@ -1,13 +1,12 @@
 import { use } from "react";
 import BookItem from "@/components/bookItem";
 import { fetchSearchBooks } from "@/lib/api";
-import { delay } from "@/utils/delay";
 import { Suspense } from "react";
 import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 
 async function SearchResult({ q }: { q: string }) {
   try {
-    await delay(1500);
+    // await delay(1500); // 지연 제거
     const books = await fetchSearchBooks(q || "");
 
     return (

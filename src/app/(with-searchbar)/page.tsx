@@ -1,13 +1,12 @@
 import BookItem from "@/components/bookItem";
 import indexStyles from "@/app/(with-searchbar)/page.module.css";
 import { fetchAllBooks, fetchRandomBooks } from "@/lib/api";
-import { delay } from "@/utils/delay";
 import { Suspense } from "react";
 import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 
 async function SelectedBooks() {
   try {
-    await delay(5000);
+    // await delay(5000); // 지연 제거
     const selectedBooks = await fetchRandomBooks();
     return (
       <div>
@@ -26,7 +25,7 @@ async function SelectedBooks() {
 async function AllBooks() {
   console.log("AllBooks 컴포넌트 렌더링됨");
   try {
-    await delay(1000);
+    // await delay(1000); // 지연 제거
     console.log("fetchAllBooks 호출 전");
     const allBooks = await fetchAllBooks();
     console.log("fetchAllBooks 호출 후, 책 개수:", allBooks.length);
