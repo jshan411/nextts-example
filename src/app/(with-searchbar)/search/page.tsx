@@ -19,7 +19,7 @@ async function SearchResult({ q }: { q: string }) {
     );
   } catch (error) {
     console.log(error);
-    return <div>검색 결과를 가져오는데 실패했습니다.</div>;
+    throw error; // 에러를 다시 던져서 error.tsx가 처리하도록
   }
 }
 

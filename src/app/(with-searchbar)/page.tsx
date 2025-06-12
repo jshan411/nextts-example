@@ -18,7 +18,7 @@ async function SelectedBooks() {
     );
   } catch (error) {
     console.log(error);
-    return <div>Failed to fetch books</div>;
+    throw error; // 에러를 다시 던져서 error.tsx가 처리하도록
   }
 }
 
@@ -39,7 +39,7 @@ async function AllBooks() {
     );
   } catch (error) {
     console.log(error);
-    return <div>Failed to fetch books</div>;
+    throw error; // 에러를 다시 던져서 error.tsx가 처리하도록
   }
 }
 

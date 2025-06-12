@@ -6,6 +6,6 @@ export default async function Footer() {
     return <div>총 {allBooks.length}권의 도서가 있습니다.</div>;
   } catch (error) {
     console.log(error);
-    return <div>도서 정보를 불러올 수 없습니다.</div>;
+    return <div>📚 ONEBITE BOOKS</div>; // 에러 시 간단한 fallback
   }
 }
